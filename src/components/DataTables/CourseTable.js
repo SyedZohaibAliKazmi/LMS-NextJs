@@ -35,38 +35,46 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
+import Courses from "@/app/(admin)/admin/courses/page"
 
 const data = [
   {
     id: "m5gr84i9",
-    amount: 316,
-    status: "success",
+    description: "Complete Web and App Development course",
+    duration:"1 Year",
+    course:"Web & App Development",
+    status: "active",
     email: "ken99@yahoo.com",
   },
+  
   {
-    id: "3u1reuv4",
-    amount: 242,
-    status: "success",
-    email: "Abe45@gmail.com",
+    id: "m5gr84i9",
+    description: "Complete Graphic course",
+    duration:"6 Months",
+    course:"Graphic Designing",
+    status: "active",
+    email: "ken99@yahoo.com",
   },
+  
   {
-    id: "derv1ws0",
-    amount: 837,
-    status: "processing",
-    email: "Monserrat44@gmail.com",
+    id: "m5gr84i9",
+    description: "Complete Ui/Ux Designing course",
+    duration:"4 Months",
+    course:"UI/UX",
+    status: "pending",
+    email: "ken99@yahoo.com",
   },
+  
   {
-    id: "5kma53ae",
-    amount: 874,
-    status: "success",
-    email: "Silas22@gmail.com",
+    id: "m5gr84i9",
+    description: "Complete .Net Programming course",
+    duration:"1 Year",
+    course:".Net Programming",
+    status: "active",
+    email: "ken99@yahoo.com",
   },
-  {
-    id: "bhqecj4p",
-    amount: 721,
-    status: "failed",
-    email: "carmella@hotmail.com",
-  },
+  
+
 ]
 
 
@@ -102,33 +110,45 @@ export const columns = [
     ),
   },
   {
-    accessorKey: "email",
+    accessorKey: "course",
     header: ({ column }) => {
       return (
         <Button
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
-          Email
+          Course
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
-      )
+      );
     },
-    cell: ({ row }) => <div className="lowercase">{row.getValue("email")}</div>,
+    cell: ({ row }) => (
+      <div>{row.getValue("course")}</div>
+    ),
   },
   {
-    accessorKey: "amount",
-    header: () => <div className="text-right">Amount</div>,
+    accessorKey: "description",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Description
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
+    cell: ({ row }) => (
+      <div>{row.getValue("description")}</div>
+    ),
+  },
+  {
+    accessorKey: "duration",
+    header: () => <div className="text-right">Duration</div>,
     cell: ({ row }) => {
-      const amount = parseFloat(row.getValue("amount"))
-
-      // Format the amount as a dollar amount
-      const formatted = new Intl.NumberFormat("en-US", {
-        style: "currency",
-        currency: "USD",
-      }).format(amount)
-
-      return <div className="text-right font-medium">{formatted}</div>
+      const amount = row.getValue("duration");
+      return <div className="text-right font-medium">{amount}</div>;
     },
   },
   {
@@ -148,9 +168,9 @@ export const columns = [
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
             <DropdownMenuItem
-              onClick={() => navigator.clipboard.writeText(payment.id)}
+              onClick={() => navigator.clipboard.writeText(course.id)}
             >
-              Copy payment ID
+              Copy  Course
             </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem>View customer</DropdownMenuItem>
@@ -192,10 +212,10 @@ export function CourseTable() {
     <div className="w-full">
       <div className="flex items-center py-4">
         <Input
-          placeholder="Filter emails..."
-          value={(table.getColumn("email")?.getFilterValue()) ?? ""}
+          placeholder="Filter Course..."
+          value={(table.getColumn("course")?.getFilterValue()) ?? ""}
           onChange={(event) =>
-            table.getColumn("email")?.setFilterValue(event.target.value)
+            table.getColumn("course")?.setFilterValue(event.target.value)
           }
           className="max-w-sm"
         />

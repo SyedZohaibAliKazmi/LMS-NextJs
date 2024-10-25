@@ -43,7 +43,7 @@ const courses = [
   { id: "course3", name: "Python Development" },
 ];
 
-export function BatchModal() {
+export function StudentModal() {
   const [open, setOpen] = React.useState(false);
   const isDesktop = true;
 
@@ -51,13 +51,13 @@ export function BatchModal() {
     return (
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
-          <Button variant="outline">Add Batch</Button>
+          <Button variant="outline">Add Student</Button>
         </DialogTrigger>
-        <DialogContent className="sm:max-w-[425px]">
+        <DialogContent className="sm:max-w-[425px] overflow-y-auto max-h-[80vh]">
           <DialogHeader>
-            <DialogTitle>Add Batch</DialogTitle>
+            <DialogTitle className="text-orange-600 text-2xl">Add Student</DialogTitle>
           </DialogHeader>
-          <BatchForm />
+          <StudentForm />
         </DialogContent>
       </Dialog>
     );
@@ -66,13 +66,13 @@ export function BatchModal() {
   return (
     <Drawer open={open} onOpenChange={setOpen}>
       <DrawerTrigger asChild>
-        <Button variant="outline">Add Batch</Button>
+        <Button variant="outline">Add Student</Button>
       </DrawerTrigger>
       <DrawerContent>
         <DrawerHeader className="text-left">
-          <DrawerTitle>Add Batch</DrawerTitle>
+          <DrawerTitle>Add Student</DrawerTitle>
         </DrawerHeader>
-        <BatchForm className="px-4" />
+        <StudentForm className="px-4" />
         <DrawerFooter className="pt-2">
           <DrawerClose asChild>
             <Button variant="outline">Cancel</Button>
@@ -83,72 +83,67 @@ export function BatchModal() {
   );
 }
 
-function BatchForm({ className }) {
+function StudentForm({ className }) {
   return (
     <form className={cn("grid items-start gap-4", className)}>
-      {/* Batch Name */}
+      {/* User Name */}
       <div className="grid gap-2">
-        <Label htmlFor="batchName">Batch Name</Label>
+        <Label htmlFor="firstName">First Name</Label>
         <Input required type="text" id="batchName" defaultValue="" />
+      </div>
+      <div className="grid gap-2">
+        <Label htmlFor="lastName">Last Name</Label>
+        <Input required type="text" id="batchName" defaultValue="" />
+      </div>
+      <div className="grid gap-2">
+        <Label htmlFor="education"> Education</Label>
+        <Input required type="text" id="education" defaultValue="" />
+      </div>
+      <div className="grid gap-2">
+        <Label htmlFor="cnic"> CNIC</Label>
+        <Input required type="number" id="cnic" defaultValue="" />
+      </div>
+      <div className="grid gap-2">
+        <Label htmlFor="gmail"> E-Mail</Label>
+        <Input required type="email" id="email" defaultValue="" />
+      </div>
+      <div className="grid gap-2">
+        <Label htmlFor="file"> Profile Picture</Label>
+        <Input required type="file" id="file" defaultValue="" />
+      </div>
+      <div className="grid gap-2">
+        <Label htmlFor="address">Address</Label>
+        <Input required type="text" id="address" defaultValue="" />
       </div>
 
       {/* Status */}
       <div className="grid gap-2">
-        <Label htmlFor="status">Status</Label>
+        <Label htmlFor="status">Gender</Label>
         <Select required>
           <SelectTrigger>
-            <SelectValue placeholder="Pending, Completed, Ongoing, Merged" />
+            <SelectValue placeholder="Gender" />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="pending">Pending</SelectItem>
-            <SelectItem value="completed">Completed</SelectItem>
-            <SelectItem value="ongoing">Ongoing</SelectItem>
-            <SelectItem value="merged">Merged</SelectItem>
+            <SelectItem value="male">Male</SelectItem>
+            <SelectItem value="female">Female</SelectItem>
+          </SelectContent>
+        </Select>
+      </div>
+      {/* Status */}
+      <div className="grid gap-2">
+        <Label htmlFor="status">Role</Label>
+        <Select required>
+          <SelectTrigger>
+            <SelectValue placeholder="Gender" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="trainer">Trainer</SelectItem>
+            <SelectItem value="student">Student</SelectItem>
           </SelectContent>
         </Select>
       </div>
 
-      {/* Trainer */}
-      <div className="grid gap-2">
-        <Label htmlFor="trainer">Trainer</Label>
-        <Select required>
-          <SelectTrigger>
-            <SelectValue placeholder="Select Trainer" />
-          </SelectTrigger>
-          <SelectContent>
-            {trainers.map((trainer) => (
-              <SelectItem key={trainer.id} value={trainer.name}>
-                {trainer.name}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
-      </div>
-
-      {/* No of Students */}
-      <div className="grid gap-2">
-        <Label htmlFor="noOfStudents">No of Students</Label>
-        <Input required type="number" id="noOfStudents" defaultValue="" />
-      </div>
-
-      {/* Course */}
-      <div className="grid gap-2">
-        <Label htmlFor="course">Course</Label>
-        <Select required>
-          <SelectTrigger>
-            <SelectValue placeholder="Select Course" />
-          </SelectTrigger>
-          <SelectContent>
-            {courses.map((course) => (
-              <SelectItem key={course.id} value={course.name}>
-                {course.name}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
-      </div>
-
-      <Button type="submit">Add Batch</Button>
+      <Button type="submit" className="bg-slate-900 font-semibold  hover:bg-orange-600  text-white hover:text-black ">Submit</Button>
     </form>
   );
 }
