@@ -5,7 +5,7 @@ import Link from "next/link";
 export default function Layout({ children }) {
   return (
     <div>
-      <Tabs defaultValue="dashboard" className="w-full">
+      <Tabs defaultValue="dashboard" className="w-full ">
       
 
         <TabsList className="w-full bg-yellow-100">
@@ -21,7 +21,7 @@ export default function Layout({ children }) {
           </Link>
           <Link href={`/admin/trainers`}>
           <TabsTrigger value="trainers">Trainers</TabsTrigger>
-          </Link>
+          </Link> 
           <Link href={`/admin/students`}>
           <TabsTrigger value="students">Students</TabsTrigger>
           </Link>
